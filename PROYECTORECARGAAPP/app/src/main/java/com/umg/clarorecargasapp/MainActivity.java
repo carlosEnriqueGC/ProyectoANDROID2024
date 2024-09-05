@@ -9,14 +9,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+import android.content.SharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String KEY_FIRST_LAUNCH = "first_launch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        // Configurar la base de datos
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        if (db != null) {
+            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            boolean isFirstLaunch = preferences.getBoolean(KEY_FIRST_LAUNCH, true);
+
+            if (isFirstLaunch) {
+                // Conexión exitosa
+                Toast.makeText(this, "Conexión a la base de datos establecida", Toast.LENGTH_SHORT).show();
+
+                // Guardar que ya se mostró el Toast
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(KEY_FIRST_LAUNCH, false);
+                editor.apply();
+            }
+        }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -67,5 +93,16 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Cuando la aplicación se cierra, restablecer la bandera para la próxima vez que se abra
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(KEY_FIRST_LAUNCH, true);
+        editor.apply();
     }
 }
