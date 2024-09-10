@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ClaroRecargasApp</string>
+    <string name="descripcion_boton">Menú desplegable</string>
 </resources>

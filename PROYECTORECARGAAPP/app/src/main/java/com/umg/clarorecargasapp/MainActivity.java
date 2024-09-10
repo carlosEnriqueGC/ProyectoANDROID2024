@@ -10,13 +10,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.content.SharedPreferences;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnSaldo = findViewById(R.id.btnSaldo);
         btnSaldo.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, IngresoDatosClienteES.class);
+            startActivity(intent);
+        });
+
+        ImageButton MenuDesplegable = findViewById(R.id.IconMenu);
+        MenuDesplegable.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
             startActivity(intent);
         });
 
