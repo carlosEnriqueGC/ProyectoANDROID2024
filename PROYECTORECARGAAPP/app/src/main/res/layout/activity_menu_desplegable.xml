@@ -14,6 +14,20 @@
 
     <!-- Botón para Datos de tienda -->
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="344dp"
+        android:layout_height="297dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.745"
+        app:srcCompat="@drawable/fondo" />
+
     <ImageButton
         android:id="@+id/btnVolverMD"
         android:layout_width="61dp"
@@ -27,7 +41,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065"
+        app:layout_constraintVertical_bias="0.066"
         app:srcCompat="@drawable/regresar2" />
 
     <TextView
@@ -35,30 +49,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Menu de opciones"
+        android:text="Ingreso de datos"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="343dp"
-        android:layout_height="393dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827"
-        tools:srcCompat="@drawable/fondo" />
+        app:layout_constraintVertical_bias="0.079" />
 
     <RelativeLayout
         android:id="@+id/layoutDatosTienda"
-        android:layout_width="343dp"
+        android:layout_width="320dp"
         android:layout_height="82dp"
         android:layout_below="@id/tituloMenu"
         android:layout_marginStart="24dp"
@@ -104,7 +107,7 @@
 
     <RelativeLayout
         android:id="@+id/layoutCodigosUtilizados"
-        android:layout_width="344dp"
+        android:layout_width="320dp"
         android:layout_height="99dp"
         android:layout_below="@id/tituloMenu"
         android:layout_marginStart="16dp"
@@ -113,10 +116,10 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353">
+        app:layout_constraintVertical_bias="0.368">
 
 
         <TextView

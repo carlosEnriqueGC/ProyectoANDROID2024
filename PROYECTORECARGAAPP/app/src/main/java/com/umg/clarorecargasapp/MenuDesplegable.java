@@ -34,7 +34,7 @@ public class MenuDesplegable extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navegar a la actividad Datos de tienda
-                Intent intent = new Intent(MenuDesplegable.this, MenuDesplegable.class);
+                Intent intent = new Intent(MenuDesplegable.this, PantallaIngresoTienda.class);
                 startActivity(intent);
             }
         });
