@@ -14,12 +14,22 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.content.SharedPreferences;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
-
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
-    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,62 +56,56 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Encuentra el botón y configúralo para iniciar la nueva actividad
-        Button btnInternet = findViewById(R.id.btnInternet);
-        btnInternet.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuInternet.class);
-            startActivity(intent);
-        });
+        // Configurar los botones
+        configureButton(R.id.btnInternet, MenuInternet.class);
+        configureButton(R.id.btnTodoIncluido, MenuTodoIncluido.class);
+        configureButton(R.id.btnMinutos, MenuMinutos.class);
+        configureButton(R.id.btnRedes, MenuRedes.class);
+        configureButton(R.id.btnSaldo, IngresoDatosClienteES.class);
+        configureImageButton(R.id.IconMenu, MenuDesplegable.class);
 
-        // Encuentra el botón y configúralo para iniciar la nueva actividad
-        Button btnTodoIncluido = findViewById(R.id.btnTodoIncluido);
-        btnTodoIncluido.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuTodoIncluido.class);
-            startActivity(intent);
-        });
-
-        // Encuentra el botón y configúralo para iniciar la nueva actividad
-        Button btnMinutos = findViewById(R.id.btnMinutos);
-        btnMinutos.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuMinutos.class);
-            startActivity(intent);
-        });
-
-        // Encuentra el botón y configúralo para iniciar la nueva actividad
-        Button btnRedes = findViewById(R.id.btnRedes);
-        btnRedes.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuRedes.class);
-            startActivity(intent);
-        });
-
-        // Encuentra el botón y configúralo para iniciar la nueva actividad
-        Button btnSaldo = findViewById(R.id.btnSaldo);
-        btnSaldo.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, IngresoDatosClienteES.class);
-            startActivity(intent);
-        });
-
-        ImageButton MenuDesplegable = findViewById(R.id.IconMenu);
-        MenuDesplegable.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MenuDesplegable.class);
-            startActivity(intent);
-        });
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        // Configurar el manejo del botón "Atrás"
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                // Cierra la aplicación al presionar el botón de retroceso
-                finishAffinity();  // Cierra todas las actividades y sale de la aplicación
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Salir de la aplicación")
+                        .setMessage("¿Está seguro de que desea salir de la aplicación?")
+                        .setPositiveButton("Sí", (dialog, which) -> {
+                            // Si el usuario selecciona "Sí", cerrar la aplicación
+                            finishAffinity(); // Cierra todas las actividades
+                            System.exit(0);   // Opcionalmente terminar el proceso
+                        })
+                        .setNegativeButton("No", (dialog, which) -> {
+                            // Si el usuario selecciona "No", cerrar el diálogo
+                            dialog.dismiss();
+                        })
+                        .setCancelable(false) // Evita que el diálogo se cierre al tocar fuera de él
+                        .show();
             }
-        };
-        getOnBackPressedDispatcher().addCallback(this, callback);
+        });
+    }
+
+    private void configureButton(int buttonId, Class<?> activityClass) {
+        Button button = findViewById(buttonId);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, activityClass);
+            startActivity(intent);
+        });
+    }
+
+    private void configureImageButton(int buttonId, Class<?> activityClass) {
+        ImageButton button = findViewById(buttonId);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, activityClass);
+            startActivity(intent);
+        });
     }
 
     @Override

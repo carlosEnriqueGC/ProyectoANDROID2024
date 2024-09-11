@@ -11,6 +11,7 @@ import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -32,10 +33,21 @@ public class IngresoDatosCliente extends AppCompatActivity {
 
         Button btnCancelar = findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(v -> {
-            Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class);
-            startActivity(intent);
+            // Crear el AlertDialog para confirmar la cancelación
+            new AlertDialog.Builder(IngresoDatosCliente.this)
+                    .setTitle("Cancelar")
+                    .setMessage("¿Seguro que deseas cancelar?")
+                    .setPositiveButton("Sí", (dialog, which) -> {
+                        // Si selecciona "Sí", redirigir a MainActivity
+                        Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class);
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Si selecciona "No", cerrar el diálogo y permanecer en la misma pantalla
+                        dialog.dismiss();
+                    })
+                    .show();
         });
-
         // aqui obtenemos los botones que estan en el XML
         EditText etPhoneNumber = findViewById(R.id.etPhoneNumber);
         Button btnConfirmar = findViewById(R.id.btnConfirmar);
