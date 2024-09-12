@@ -8,7 +8,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Nombre y versión de la base de datos
     private static final String DATABASE_NAME = "BDRecargasClaro.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,6 +36,13 @@ public class DBHelper extends SQLiteOpenHelper {
     // Actualización de la base de datos si cambia la versión
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS tbl_datosTienda");
+        db.execSQL("DROP TABLE IF EXISTS tbl_codigosRecarga");
+        onCreate(db);
+    }
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Lógica para manejar el downgrade, similar al upgrade
         db.execSQL("DROP TABLE IF EXISTS tbl_datosTienda");
         db.execSQL("DROP TABLE IF EXISTS tbl_codigosRecarga");
         onCreate(db);

@@ -8,6 +8,21 @@
     android:background="#FFFFFF"
     tools:context=".PantallaIngresoTienda">
 
+    <TextView
+        android:id="@+id/tituloPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Registro de datos"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.222" />
+
     <ImageButton
         android:id="@+id/btnVolverTienda"
         android:layout_width="61dp"
@@ -37,19 +52,19 @@
         app:srcCompat="@drawable/datosdelusuario" />
 
     <TextView
-        android:id="@+id/TituloPrincipal"
+        android:id="@+id/Subtitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Registro de datos"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:text="Tabla de datos"
+        android:textSize="20sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.669" />
 
     <EditText
         android:id="@+id/etNombre"
@@ -226,7 +241,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973">
+        app:layout_constraintVertical_bias="0.991">
 
         <!-- Contenedor exclusivo para el RecyclerView -->
         <LinearLayout
