@@ -1,10 +1,12 @@
 package com.umg.clarorecargasapp;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -13,20 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AlertDialog;
+
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class PantallaIngresoTienda extends AppCompatActivity {
 
-    private EditText nombreEditText, pinEditText, estadoEditText;
+    private EditText nombreEditText, pinEditText;
     private LinearLayout guardarButton; // Cambiado a LinearLayout
-    private RecyclerView recyclerView;
-    private TiendaAdapter adapter;
-    private List<Tienda> tiendaList;
     private DBHelper dbHelper;
+    private Spinner spinnerEstado;
+    private LinearLayout verRegistro, verRegistrosButton;
+    private boolean isEditing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +39,48 @@ public class PantallaIngresoTienda extends AppCompatActivity {
 
         nombreEditText = findViewById(R.id.etNombre);
         pinEditText = findViewById(R.id.etPIN);
-        estadoEditText = findViewById(R.id.etEstado);
+        spinnerEstado = findViewById(R.id.spinnerEstado);
         guardarButton = findViewById(R.id.btnGuardar);
-        recyclerView = findViewById(R.id.recyclerViewTienda);
+        verRegistrosButton = findViewById(R.id.btnVerRegistros);
+        final TextView textGuardar = findViewById(R.id.text_guardar);
 
         dbHelper = new DBHelper(this);
-        tiendaList = new ArrayList<>();
-        adapter = new TiendaAdapter(tiendaList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-
-        // Cargar datos al iniciar
-        loadTiendaData();
-
-        guardarButton.setOnClickListener(v -> {
-            saveData();
-            loadTiendaData(); // Actualiza el RecyclerView
-
-            // Mostrar el Toast
-            Toast.makeText(PantallaIngresoTienda.this, "Datos registrados", Toast.LENGTH_SHORT).show();
+        guardarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isEditing) {
+                    // Habilitar los componentes cuando se hace clic por primera vez
+                    nombreEditText.setEnabled(true);
+                    pinEditText.setEnabled(true);
+                    spinnerEstado.setEnabled(true);
+                    textGuardar.setText("Guardar");
+                    isEditing = true;
+                } else {
+                    // Confirmar si el usuario quiere guardar los datos
+                    new AlertDialog.Builder(PantallaIngresoTienda.this)
+                            .setTitle("Confirmación")
+                            .setMessage("¿Desea guardar los datos?")
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Guardar los datos en la base de datos
+                                    saveData();
+                                    Toast.makeText(PantallaIngresoTienda.this, "Datos registrados", Toast.LENGTH_SHORT).show();
+                                    nombreEditText.setEnabled(false);
+                                    pinEditText.setEnabled(false);
+                                    spinnerEstado.setEnabled(false);
+                                    textGuardar.setText("Agregar");
+                                    isEditing = false;
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // No hacer nada, solo informar al usuario
+                                    Toast.makeText(PantallaIngresoTienda.this, "Registro cancelado", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .show();
+                }
+            }
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -68,11 +94,24 @@ public class PantallaIngresoTienda extends AppCompatActivity {
             Intent intent = new Intent(PantallaIngresoTienda.this, MenuDesplegable.class);
             startActivity(intent);
         });
+
+        // Configurar adaptador para el Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.estado_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEstado.setAdapter(adapter);
+
+        verRegistrosButton.setOnClickListener(v -> {
+            // Iniciar la nueva actividad para ver registros
+            Intent intent = new Intent(PantallaIngresoTienda.this, PantalladeRegistrosTienda.class);
+            startActivity(intent);
+        });
+
     }
     private void saveData() {
         String nombre = nombreEditText.getText().toString();
         String pinString = pinEditText.getText().toString();
-        String estado = estadoEditText.getText().toString();
+        String estado = spinnerEstado.getSelectedItem().toString();
 
         if (nombre.isEmpty() || pinString.isEmpty() || estado.isEmpty()) {
             // Opcional: Muestra un mensaje de error si los campos están vacíos
@@ -96,37 +135,4 @@ public class PantallaIngresoTienda extends AppCompatActivity {
         db.insert("tbl_datosTienda", null, values);
         db.close();
     }
-    private void loadTiendaData() {
-        tiendaList.clear();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM tbl_datosTienda", null);
-
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    int idColumnIndex = cursor.getColumnIndexOrThrow("ID_tienda");
-                    int nombreColumnIndex = cursor.getColumnIndexOrThrow("Nombre_tienda");
-                    int pinColumnIndex = cursor.getColumnIndexOrThrow("PIN");
-                    int estadoColumnIndex = cursor.getColumnIndexOrThrow("Estado");
-
-                    // Extrae los valores de las columnas
-                    int id = cursor.getInt(idColumnIndex);
-                    String nombre = cursor.getString(nombreColumnIndex);
-                    int pin = cursor.getInt(pinColumnIndex);
-                    String estado = cursor.getString(estadoColumnIndex);
-
-                    // Añade el objeto Tienda a la lista
-                    tiendaList.add(new Tienda(id, nombre, pin, estado));
-                } while (cursor.moveToNext());
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace(); // Maneja el error aquí
-        } finally {
-            cursor.close();
-            db.close();
-        }
-
-        adapter.notifyDataSetChanged();
-    }
-
 }
