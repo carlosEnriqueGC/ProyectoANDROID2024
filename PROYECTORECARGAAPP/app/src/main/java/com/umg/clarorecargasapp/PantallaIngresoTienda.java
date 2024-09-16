@@ -31,7 +31,7 @@ import java.util.List;
 public class PantallaIngresoTienda extends AppCompatActivity {
 
     private EditText nombreEditText, pinEditText;
-    private LinearLayout guardarButton, modificarButton; // Cambiado a LinearLayout
+    private LinearLayout guardarButton, modificarButton, eliminarButton; // Cambiado a LinearLayout
     private DBHelper dbHelper;
     private Spinner spinnerEstado;
     private LinearLayout verRegistro, verRegistrosButton;
@@ -49,8 +49,10 @@ public class PantallaIngresoTienda extends AppCompatActivity {
         spinnerEstado = findViewById(R.id.spinnerEstado);
         guardarButton = findViewById(R.id.btnGuardar);
         modificarButton = findViewById(R.id.btnModificar);
+        eliminarButton = findViewById(R.id.btnEliminar);
         verRegistrosButton = findViewById(R.id.btnVerRegistros);
         final TextView textGuardar = findViewById(R.id.text_guardar);
+        spinnerEstado.setEnabled(false);
 
         dbHelper = new DBHelper(this);
         guardarButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +64,9 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                     pinEditText.setEnabled(true);
                     spinnerEstado.setEnabled(true);
                     textGuardar.setText("Guardar");
+                    modificarButton.setEnabled(false);
+                    eliminarButton.setEnabled(false);
+                    Toast.makeText(PantallaIngresoTienda.this, "Componentes habilitados", Toast.LENGTH_SHORT).show();
                     isEditing = true;
                 } else {
                     // Confirmar si el usuario quiere guardar los datos
@@ -77,13 +82,19 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                                     pinEditText.setEnabled(false);
                                     spinnerEstado.setEnabled(false);
                                     textGuardar.setText("Agregar");
+                                    modificarButton.setEnabled(true);
+                                    eliminarButton.setEnabled(true);
                                     isEditing = false;
+                                    resetComponents(nombreEditText, pinEditText, spinnerEstado);
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // No hacer nada, solo informar al usuario
                                     Toast.makeText(PantallaIngresoTienda.this, "Registro cancelado", Toast.LENGTH_SHORT).show();
+                                    modificarButton.setEnabled(true);
+                                    eliminarButton.setEnabled(true);
+                                    resetComponents(nombreEditText, pinEditText, spinnerEstado);
                                 }
                             })
                             .show();
@@ -123,6 +134,8 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                     nombreEditText.setEnabled(true);
                     pinEditText.setEnabled(true);
                     spinnerEstado.setEnabled(true);
+                    guardarButton.setEnabled(false);
+                    eliminarButton.setEnabled(false);
                     isEditing = true;
                 } else {
                     updateStoreData();
@@ -130,11 +143,20 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                     nombreEditText.setEnabled(false);
                     pinEditText.setEnabled(false);
                     spinnerEstado.setEnabled(false);
+                    guardarButton.setEnabled(true);
+                    eliminarButton.setEnabled(true);
                     isEditing = false;
+                    resetComponents(nombreEditText, pinEditText, spinnerEstado);
                 }
             }
         });
 
+        eliminarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteDialog();
+            }
+        });
 
     }
     private void saveData() {
@@ -309,5 +331,77 @@ public class PantallaIngresoTienda extends AppCompatActivity {
         db.close();
     }
 
+    private void showDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar Tienda");
+
+        // Configurar el diseño del diálogo
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_seleccionar_tienda_eliminar, null);
+        builder.setView(dialogView);
+
+        Spinner spinnerTiendas = dialogView.findViewById(R.id.spinnerTiendas);
+        Button btnSeleccionar = dialogView.findViewById(R.id.btnSeleccionar);
+        Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+
+        // Rellenar el spinner con los nombres de las tiendas
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getStoreNames());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTiendas.setAdapter(adapter);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Configurar botón de seleccionar
+        btnSeleccionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selectedTienda = spinnerTiendas.getSelectedItem().toString();
+                confirmDelete(selectedTienda);
+                dialog.dismiss();
+            }
+        });
+
+        // Configurar botón de cancelar
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                nombreEditText.setEnabled(false);
+                pinEditText.setEnabled(false);
+                spinnerEstado.setEnabled(false);
+            }
+        });
+    }
+
+    private void confirmDelete(final String tienda) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar Eliminación")
+                .setMessage("¿Está seguro de que desea eliminar la tienda " + tienda + "?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteTienda(tienda);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void deleteTienda(String tienda) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int rowsDeleted = db.delete("tbl_datosTienda", "Nombre_tienda = ?", new String[]{tienda});
+
+        if (rowsDeleted > 0) {
+            Toast.makeText(this, "Tienda eliminada", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Error al eliminar la tienda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void resetComponents(EditText nombreEditText, EditText pinEditText, Spinner spinnerEstado) {
+        nombreEditText.setText(""); // Limpia el texto del EditText nombre
+        pinEditText.setText(""); // Limpia el texto del EditText pin
+        spinnerEstado.setSelection(0); // Reestablece el Spinner a la primera opción
+    }
 
 }
