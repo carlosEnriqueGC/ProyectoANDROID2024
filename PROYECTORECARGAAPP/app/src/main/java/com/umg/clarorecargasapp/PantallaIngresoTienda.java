@@ -36,7 +36,7 @@ public class PantallaIngresoTienda extends AppCompatActivity {
     private Spinner spinnerEstado;
     private LinearLayout verRegistro, verRegistrosButton;
     private boolean isEditing = false;
-
+    private int storeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +174,7 @@ public class PantallaIngresoTienda extends AppCompatActivity {
         // Referencias a los componentes del diálogo
         final Spinner spinnerTiendas = dialog.findViewById(R.id.spinnerTiendas);
         final Button btnSeleccionar = dialog.findViewById(R.id.btnSeleccionar);
+        final Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
 
         // Rellenar el spinner con los nombres de las tiendas
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getStoreNames());
@@ -189,6 +190,20 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss(); // Cierra el diálogo
+                isEditing = false;  // Restablece el estado al cancelar
+                nombreEditText.setEnabled(false);
+                pinEditText.setEnabled(false);
+                spinnerEstado.setEnabled(false);
+            }
+        });
+
+        // Configura el diálogo para que no se cancele tocando fuera
+        dialog.setCanceledOnTouchOutside(false);
 
         dialog.show();
     }
@@ -236,11 +251,18 @@ public class PantallaIngresoTienda extends AppCompatActivity {
 
             // Verificar si el cursor tiene filas
             if (cursor != null && cursor.moveToFirst()) {
+                // Obtener índices de las columnas
+                int idIndex = cursor.getColumnIndex("ID_tienda");
                 int nombreIndex = cursor.getColumnIndex("Nombre_tienda");
                 int pinIndex = cursor.getColumnIndex("PIN");
                 int estadoIndex = cursor.getColumnIndex("Estado");
 
-                if (nombreIndex >= 0 && pinIndex >= 0 && estadoIndex >= 0) {
+                // Verificar si los índices de las columnas son válidos
+                if (idIndex >= 0 && nombreIndex >= 0 && pinIndex >= 0 && estadoIndex >= 0) {
+                    // Guardar el ID de la tienda
+                    storeId = cursor.getInt(idIndex);
+
+                    // Cargar los datos en los campos de edición
                     nombreEditText.setText(cursor.getString(nombreIndex));
                     pinEditText.setText(cursor.getString(pinIndex));
                     spinnerEstado.setSelection(getSpinnerIndex(spinnerEstado, cursor.getString(estadoIndex)));
@@ -282,7 +304,8 @@ public class PantallaIngresoTienda extends AppCompatActivity {
         values.put("PIN", pin);
         values.put("Estado", estado);
 
-        db.update("tbl_datosTienda", values, "Nombre_tienda = ?", new String[]{nombre});
+        // Actualiza usando el ID de la tienda
+        db.update("tbl_datosTienda", values, "ID_tienda = ?", new String[]{String.valueOf(storeId)});
         db.close();
     }
 
