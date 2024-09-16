@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textSeleccionarTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Para eliminar, seleccione una tienda"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="10dp" />
+
+    <Spinner
+        android:id="@+id/spinnerTiendas"
+        android:layout_width="265dp"
+        android:layout_height="48dp"
+        android:background="@drawable/spinner_border" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnSeleccionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar"
+            android:layout_marginEnd="10dp" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+    </LinearLayout>
+</LinearLayout>

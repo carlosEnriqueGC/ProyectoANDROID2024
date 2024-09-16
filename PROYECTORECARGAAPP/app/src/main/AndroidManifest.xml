@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ClaroRecargasApp"
         tools:targetApi="31">
         <activity
+            android:name=".PantalladeRegistrosTienda"
+            android:exported="false" />
+        <activity
+            android:name=".TabladeRegistroTienda"
+            android:exported="false" />
+        <activity
             android:name=".PantallaIngresoTienda"
             android:exported="false" />
         <activity
