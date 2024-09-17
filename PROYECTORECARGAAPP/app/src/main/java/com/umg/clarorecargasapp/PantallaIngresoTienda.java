@@ -221,6 +221,8 @@ public class PantallaIngresoTienda extends AppCompatActivity {
                 nombreEditText.setEnabled(false);
                 pinEditText.setEnabled(false);
                 spinnerEstado.setEnabled(false);
+                guardarButton.setEnabled(true);
+                eliminarButton.setEnabled(true);
             }
         });
 
