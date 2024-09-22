@@ -38,7 +38,7 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
         guardarButton = findViewById(R.id.btnGuardarCU);
         modificarButton = findViewById(R.id.btnModificarCU);
         eliminarButton = findViewById(R.id.btnEliminarCU);
-        verRegistro = findViewById(R.id.btnVerRegistrosCU);
+        verRegistrosButton = findViewById(R.id.btnVerRegistrosCU);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -64,5 +64,10 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapter2);
 
+        verRegistrosButton.setOnClickListener(v -> {
+            // Iniciar la nueva actividad para ver registros
+            Intent intent = new Intent(pantalla_ingreso_codigosu.this, PantallaDeRegistrosCodigos.class);
+            startActivity(intent);
+        });
     }
 }
