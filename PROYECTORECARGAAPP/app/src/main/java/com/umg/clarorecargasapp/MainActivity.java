@@ -1,10 +1,12 @@
 package com.umg.clarorecargasapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
             }
         }
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -97,8 +98,25 @@ public class MainActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                // Cierra la aplicación al presionar el botón de retroceso
-                finishAffinity();  // Cierra todas las actividades y sale de la aplicación
+                // Mostrar un cuadro de diálogo para confirmar la salida
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Salir")
+                        .setMessage("¿Deseas salir de la aplicación?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'Sí', cerrar la aplicación
+                                finishAffinity();  // Cierra todas las actividades y sale de la aplicación
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'No', simplemente cierra el diálogo
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);

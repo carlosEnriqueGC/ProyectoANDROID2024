@@ -1,5 +1,6 @@
 package com.umg.clarorecargasapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity; // Para el posicionamiento del Toast
@@ -11,6 +12,7 @@ import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -58,5 +60,39 @@ public class IngresoDatosCliente extends AppCompatActivity {
                 }
             }
         });
+
+        Button btnCancelarS = findViewById(R.id.btnCancelar);
+        btnCancelarS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crea un cuadro de diálogo (AlertDialog)
+                new AlertDialog.Builder(IngresoDatosCliente.this)
+                        .setTitle("Cancelar")
+                        .setMessage("¿Deseas cancelar?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'Sí', navega al menú
+                                Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class); // Asegúrate de reemplazar MenuActivity con tu actividad de menú real
+                                startActivity(intent);
+                                finish(); // Opcional: cierra la actividad actual
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'No', simplemente cierra el diálogo
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+            }
+        });
+
+
+
+
+
     }
 }
