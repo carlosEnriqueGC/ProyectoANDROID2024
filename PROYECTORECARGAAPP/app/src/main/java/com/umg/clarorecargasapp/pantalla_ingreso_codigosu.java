@@ -27,7 +27,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class pantalla_ingreso_codigosu extends AppCompatActivity {
 
@@ -281,21 +283,22 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
         dialog.show();
     }
 
-    // Método para obtener los códigos de recarga desde la base de datos
+    // Método para obtener los códigos de recarga desde la base de datos sin duplicados
     private List<String> getTipoCodigoRecarga() {
+        Set<String> codigoRecargasSet = new HashSet<>(); // Usamos un Set para evitar duplicados
         List<String> codigoRecargas = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = null;
 
         try {
-            cursor = db.rawQuery("SELECT Tipo_codigo FROM tbl_codigosRecarga", null);
+            cursor = db.rawQuery("SELECT DISTINCT Tipo_codigo FROM tbl_codigosRecarga", null);
 
             if (cursor != null && cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex("Tipo_codigo");
 
                 if (columnIndex >= 0) {
                     do {
-                        codigoRecargas.add(cursor.getString(columnIndex));
+                        codigoRecargasSet.add(cursor.getString(columnIndex)); // Añadimos al Set
                     } while (cursor.moveToNext());
                 } else {
                     Log.e("DB_ERROR", "Columna 'Tipo_codigo' no encontrada.");
@@ -309,8 +312,10 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
             }
         }
 
+        codigoRecargas.addAll(codigoRecargasSet); // Convertimos el Set a una lista
         return codigoRecargas;
     }
+
 
     // Método para obtener los precios de recarga filtrados por tipo
     private ArrayList<String> getPreciosRecargaPorTipo(String tipo) {
