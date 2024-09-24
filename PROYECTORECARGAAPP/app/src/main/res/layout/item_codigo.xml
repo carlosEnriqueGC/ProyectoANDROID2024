@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/codigoCUTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Codigo"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tipoCUTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Tipo"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/precioCUTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Precio"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/secuenciaCUTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Secuencia"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/estadoCUTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Estado"
+        android:textSize="14sp" />
+</TableRow>

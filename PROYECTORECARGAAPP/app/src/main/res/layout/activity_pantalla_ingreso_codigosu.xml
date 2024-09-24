@@ -6,10 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".PantallaIngresoTienda">
+    tools:context=".pantalla_ingreso_codigosu">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="135dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        app:srcCompat="@drawable/codigospin" />
 
     <TextView
-        android:id="@+id/tituloPrincipal"
+        android:id="@+id/tituloPrincipal3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -23,9 +35,112 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.222" />
 
+    <Spinner
+        android:id="@+id/spinnerTipocodigo"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/spinner_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
+
+    <ImageView
+        android:id="@+id/iconTipoCU"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.309"
+        app:srcCompat="@drawable/tiporecarga" />
+
+    <EditText
+        android:id="@+id/precioCodigo"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/spinner_border"
+        android:enabled="false"
+        android:hint="Precio"
+        android:inputType="number"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
+
+    <ImageView
+        android:id="@+id/iconPrecioCU"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399"
+        app:srcCompat="@drawable/preciorecarga" />
+
+    <EditText
+        android:id="@+id/secuenciaCodigo"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/spinner_border"
+        android:enabled="false"
+        android:hint="Secuencia de codigo"
+        android:inputType="phone"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.484" />
+
+    <ImageView
+        android:id="@+id/iconSecuenciaCU"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.486"
+        app:srcCompat="@drawable/secuenciacodigo" />
+
+    <Spinner
+        android:id="@+id/spinnerEstado2"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/spinner_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <ImageView
+        android:id="@+id/iconEstadoCU"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57"
+        app:srcCompat="@drawable/estado" />
 
     <ImageButton
-        android:id="@+id/btnVolverTienda"
+        android:id="@+id/btnVolverCU"
         android:layout_width="61dp"
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
@@ -40,188 +155,8 @@
         app:layout_constraintVertical_bias="0.037"
         app:srcCompat="@drawable/regresar2" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="135dp"
-        android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042"
-        app:srcCompat="@drawable/datosdelusuario" />
-
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        android:hint="Nombre de la Tienda"
-        android:textSize="20sp"
-        android:enabled="false"
-        android:background="@drawable/spinner_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307" />
-
-    <ImageView
-        android:id="@+id/iconNombreIT"
-        android:layout_width="49dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309"
-        app:srcCompat="@drawable/avatar" />
-
-    <EditText
-        android:id="@+id/etPIN"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        android:background="@drawable/spinner_border"
-        android:enabled="false"
-        android:hint="PIN"
-        android:inputType="number"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.397" />
-
-    <Spinner
-        android:id="@+id/spinnerEstado"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        android:background="@drawable/spinner_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.488" />
-
-    <ImageView
-        android:id="@+id/iconEstadoIT"
-        android:layout_width="49dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.491"
-        app:srcCompat="@drawable/estado" />
-
-    <ImageView
-        android:id="@+id/iconPINIT"
-        android:layout_width="49dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399"
-        app:srcCompat="@drawable/codigospantallaingreso" />
-
     <LinearLayout
-        android:id="@+id/btnEliminar"
-        android:layout_width="85dp"
-        android:layout_height="87dp"
-        android:background="@drawable/rounded_corner_icons"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.853"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626">
-
-        <ImageView
-            android:id="@+id/icon_Eliminar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="Logo"
-            android:src="@drawable/icon_eliminar" />
-
-        <TextView
-            android:id="@+id/text_Eliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Eliminar"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnModificar"
-        android:layout_width="85dp"
-        android:layout_height="87dp"
-        android:background="@drawable/rounded_corner_icons"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626">
-
-        <ImageView
-            android:id="@+id/icon_Modificar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="Logo"
-            android:src="@drawable/icon_modificar" />
-
-        <TextView
-            android:id="@+id/text_Modificar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Modificar"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnGuardar"
-        android:layout_width="85dp"
-        android:layout_height="87dp"
-        android:background="@drawable/rounded_corner_icons"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626">
-
-        <ImageView
-            android:id="@+id/icon_guardar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="Logo"
-            android:src="@drawable/icon_guardar" />
-
-        <TextView
-            android:id="@+id/text_guardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Agregar"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnVerRegistros"
+        android:id="@+id/btnVerRegistrosCU"
         android:layout_width="305dp"
         android:layout_height="85dp"
         android:background="@drawable/rounded_corner_icons"
@@ -232,10 +167,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.771">
+        app:layout_constraintVertical_bias="0.857">
 
         <TextView
-            android:id="@+id/text_VerRegistros"
+            android:id="@+id/text_VerRegistrosCU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -244,12 +179,100 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/icon_VerRegistros"
+            android:id="@+id/icon_VerRegistrosCU"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="Logo"
             android:src="@drawable/icon_registro" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/btnEliminarCU"
+        android:layout_width="85dp"
+        android:layout_height="87dp"
+        android:background="@drawable/rounded_corner_icons"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712">
+
+        <ImageView
+            android:id="@+id/icon_EliminarCU"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/icon_eliminar" />
+
+        <TextView
+            android:id="@+id/text_EliminarCU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Eliminar"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnGuardarCU"
+        android:layout_width="85dp"
+        android:layout_height="87dp"
+        android:background="@drawable/rounded_corner_icons"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712">
+
+        <ImageView
+            android:id="@+id/icon_guardarCU"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/icon_guardar" />
+
+        <TextView
+            android:id="@+id/text_guardarCU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Agregar"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnModificarCU"
+        android:layout_width="85dp"
+        android:layout_height="87dp"
+        android:background="@drawable/rounded_corner_icons"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712">
+
+        <ImageView
+            android:id="@+id/icon_ModificarCU"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/icon_modificar" />
+
+        <TextView
+            android:id="@+id/text_ModificarCU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Modificar"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

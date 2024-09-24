@@ -30,12 +30,14 @@
             android:id="@+id/btnSeleccionar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#E4002B"
             android:text="Seleccionar"
             android:layout_marginEnd="10dp" />
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
+            android:backgroundTint="#E4002B"
             android:layout_height="wrap_content"
             android:text="Cancelar" />
     </LinearLayout>
