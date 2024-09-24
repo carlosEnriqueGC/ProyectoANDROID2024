@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tipoCodigo_options">
-        <item>Selecciona</item>
+        <item>Tipo de recarga</item>
         <item>Internet</item>
         <item>Todo incluido</item>
         <item>Minutos</item>

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".pantalla_ingreso_codigosu">
 
     <ImageView
@@ -93,7 +94,7 @@
         android:background="@drawable/spinner_border"
         android:enabled="false"
         android:hint="Secuencia de codigo"
-        android:inputType="number"
+        android:inputType="phone"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
