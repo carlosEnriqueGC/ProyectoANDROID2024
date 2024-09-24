@@ -69,72 +69,175 @@
             <!-- Botón 1 -->
 
             <!-- Botón 2 -->
-            <Button
-                android:id="@+id/btnPrecio1"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q6"
-                android:textSize="24sp" />
+            <!-- Botón Q6-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/btnPrecio2"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q11"
-                android:textSize="24sp" />
+                <Button
+                    android:id="@+id/btnPrecio1"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q6"
+                    android:textSize="20sp" />
 
-            <!-- Botón 3 -->
-            <Button
-                android:id="@+id/btnPrecio3"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q16"
-                android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
 
-            <!-- Botón 4 -->
-            <Button
-                android:id="@+id/btnPrecio4"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q11"
-                android:textSize="24sp" />
+            </LinearLayout>
+            <!-- Botón Q11-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <!-- Botón 5 -->
-            <Button
-                android:id="@+id/btnPrecio5"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q33"
-                android:textSize="24sp" />
+                <Button
+                    android:id="@+id/btnPrecio2"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q11"
+                    android:textSize="20sp" />
 
-            <!-- Botón 6 -->
-            <Button
-                android:id="@+id/btnPrecio6"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q55"
-                android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
 
-            <!-- Botón 7 -->
-            <Button
-                android:id="@+id/btnPrecio7"
-                android:layout_width="230dp"
-                android:layout_height="70dp"
-                android:backgroundTint="#E4002B"
-                android:text="Q110"
-                android:textSize="24sp" />
+            </LinearLayout>
+            <!-- Botón Q16-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnPrecio3"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q16"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
+
+            </LinearLayout>
+            <!-- Botón Q11-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnPrecio4"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q11"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/info4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
+
+            </LinearLayout>
+            <!-- Botón Q33-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnPrecio5"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q33"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/info5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
+
+            </LinearLayout>
+            <!-- Botón Q55-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnPrecio6"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q55"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/info6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
+
+            </LinearLayout>
+            <!-- Botón Q110-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnPrecio7"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#E4002B"
+                    android:text="Q110"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/info7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/informacion" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
@@ -153,6 +256,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.174" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
