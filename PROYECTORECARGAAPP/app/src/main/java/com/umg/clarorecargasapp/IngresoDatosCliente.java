@@ -1,5 +1,6 @@
 package com.umg.clarorecargasapp;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,9 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity; // Para el posicionamiento del Toast
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
 
@@ -22,12 +25,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class IngresoDatosCliente extends AppCompatActivity {
 
     private String opcion;
     private int precio;
     private EditText editTextTelefono;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class IngresoDatosCliente extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        dbHelper = new DBHelper(this);
 
         // Obtener datos del Intent
         opcion = getIntent().getStringExtra("opcion");
@@ -58,35 +67,25 @@ public class IngresoDatosCliente extends AppCompatActivity {
                 return; // Salir si está vacío
             }
 
-            // Verificar si el texto contiene solo números
-            if (!phoneNumber.matches("\\d+")) {
-                Toast.makeText(IngresoDatosCliente.this, "Los caracteres no son válidos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             // Verificar la longitud del número de teléfono (opcional)
             if (phoneNumber.length() != 8) {
-                Toast.makeText(IngresoDatosCliente.this, "El número de teléfono debe tener 10 dígitos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IngresoDatosCliente.this, "El número de teléfono debe tener 8 dígitos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Buscar la secuencia correspondiente al tipo y precio seleccionados
-            String secuencia = buscarSecuencia(opcion, precio);
-            if (secuencia != null) {
-                // Concatenar la secuencia con el número de teléfono
-                String mensaje = secuencia + phoneNumber + "*"; // Agregar '*' al final
-                // Mostrar el mensaje en un AlertDialog
-                new AlertDialog.Builder(IngresoDatosCliente.this)
-                        .setTitle("Secuencia Generada")
-                        .setMessage(mensaje)
-                        .setPositiveButton("OK", null)
-                        .show();
-            } else {
-                Toast.makeText(IngresoDatosCliente.this, "No se encontró la secuencia para el tipo y precio seleccionados.", Toast.LENGTH_SHORT).show();
+            // Verificar si el texto contiene solo números
+            if (phoneNumber.matches("\\d+")) {
+                // Buscar la secuencia correspondiente al tipo y precio seleccionados
+                String secuencia = buscarSecuencia(opcion, precio);
+                if (secuencia != null) {
+                    // Mostrar el diálogo para seleccionar la tienda
+                    showSelectStoreDialog(secuencia, phoneNumber);
+                } else {
+                    Toast.makeText(IngresoDatosCliente.this, "No se encontró la secuencia para el tipo y precio seleccionados.", Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(IngresoDatosCliente.this, "Los caracteres no son válidos", Toast.LENGTH_SHORT).show();
             }
-
-            // Mensaje informativo al abrir el sistema
-            Toast.makeText(IngresoDatosCliente.this, "Abriendo el sistema claro", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -154,6 +153,108 @@ public class IngresoDatosCliente extends AppCompatActivity {
         }
 
         return secuencia;
+    }
+
+    private void showSelectStoreDialog(String secuencia, String phoneNumber) {
+        // Crear el diálogo
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_buscar_pin);
+
+        // Referencias a los componentes del diálogo
+        final Spinner spinnerTiendas = dialog.findViewById(R.id.spinnerSeleccionTiendas);
+        final Button btnSeleccionar = dialog.findViewById(R.id.btnSeleccionarTienda);
+        final Button btnCancelar = dialog.findViewById(R.id.btnCancelarOperacion);
+
+        // Rellenar el spinner con los nombres de las tiendas
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getStoreNames());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTiendas.setAdapter(adapter);
+
+        // Acción para cuando el usuario selecciona una tienda
+        btnSeleccionar.setOnClickListener(v -> {
+            String selectedStore = spinnerTiendas.getSelectedItem().toString();
+            int pin = loadStorePin(selectedStore); // Método que busca el PIN basado en la tienda
+            if (pin != -1) {
+                // Concatenar el PIN y mostrar el mensaje final
+                String mensajeFinal = secuencia + phoneNumber + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
+                new AlertDialog.Builder(IngresoDatosCliente.this)
+                        .setTitle("Secuencia Generada")
+                        .setMessage(mensajeFinal)
+                        .setPositiveButton("OK", null)
+                        .show();
+            } else {
+                Toast.makeText(IngresoDatosCliente.this, "No se encontró el PIN para la tienda seleccionada.", Toast.LENGTH_SHORT).show();
+            }
+            dialog.dismiss();
+        });
+
+        btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+        // Configura el diálogo para que no se cancele tocando fuera
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+
+    // Método para obtener nombres de tiendas desde la base de datos
+    private List<String> getStoreNames() {
+        List<String> storeNames = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("SELECT Nombre_tienda FROM tbl_datosTienda", null);
+
+            // Verificar si hay columnas y si el cursor tiene filas
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("Nombre_tienda");
+
+                if (columnIndex >= 0) {
+                    do {
+                        storeNames.add(cursor.getString(columnIndex));
+                    } while (cursor.moveToNext());
+                } else {
+                    Log.e("DB_ERROR", "Columna 'Nombre_tienda' no encontrada.");
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error al obtener los nombres de las tiendas: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return storeNames;
+    }
+
+    private int loadStorePin(String storeName) {
+        int pin = -1; // Valor predeterminado si no se encuentra
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("SELECT PIN FROM tbl_datosTienda WHERE Nombre_tienda = ?", new String[]{storeName});
+            if (cursor != null && cursor.moveToFirst()) {
+                // Obtener el índice de la columna
+                int pinIndex = cursor.getColumnIndex("PIN");
+                if (pinIndex >= 0) { // Asegúrate de que el índice es válido
+                    pin = cursor.getInt(pinIndex);
+                } else {
+                    Log.e("DB_ERROR", "Columna 'PIN' no encontrada.");
+                }
+            } else {
+                Log.e("DB_ERROR", "No se encontraron filas para la tienda: " + storeName);
+            }
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error al obtener el PIN: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return pin;
     }
 
 }
