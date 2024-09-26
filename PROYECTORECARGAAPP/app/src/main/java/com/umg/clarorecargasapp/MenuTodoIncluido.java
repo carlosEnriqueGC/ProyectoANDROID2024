@@ -32,6 +32,9 @@ import androidx.core.view.WindowInsetsCompat.Type;
 
 public class MenuTodoIncluido extends AppCompatActivity {
 
+    String tipo = "Todo incluido";
+    private int precioSeleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,37 +55,55 @@ public class MenuTodoIncluido extends AppCompatActivity {
 
         Button btnPrecio1TI = findViewById(R.id.btnPrecio1TI);
         btnPrecio1TI.setOnClickListener(v -> {
+            precioSeleccionado = 11;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio2TI = findViewById(R.id.btnPrecio2TI);
         btnPrecio2TI.setOnClickListener(v -> {
+            precioSeleccionado = 15;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio3TI = findViewById(R.id.btnPrecio3TI);
         btnPrecio3TI.setOnClickListener(v -> {
+            precioSeleccionado = 33;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio4TI = findViewById(R.id.btnPrecio4TI);
         btnPrecio4TI.setOnClickListener(v -> {
+            precioSeleccionado = 55;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio5TI = findViewById(R.id.btnPrecio5TI);
         btnPrecio5TI.setOnClickListener(v -> {
+            precioSeleccionado = 110;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio6TI = findViewById(R.id.btnPrecio6TI);
         btnPrecio6TI.setOnClickListener(v -> {
+            precioSeleccionado = 20;
             Intent intent = new Intent(MenuTodoIncluido.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
