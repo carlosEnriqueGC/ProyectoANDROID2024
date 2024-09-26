@@ -96,7 +96,7 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
                     android:text="Q6"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/info1"
@@ -120,7 +120,7 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
                     android:text="Q11"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/info2"
@@ -145,7 +145,7 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
                     android:text="Q15"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/info3"
@@ -169,7 +169,7 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
                     android:text="Q25"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/info4"
@@ -195,7 +195,7 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
                     android:text="Q55"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/info5"

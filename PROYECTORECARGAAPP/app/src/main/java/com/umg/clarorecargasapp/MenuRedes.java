@@ -20,6 +20,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuRedes extends AppCompatActivity {
 
+    String tipo = "Redes sociales";
+    private int precioSeleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,42 +43,60 @@ public class MenuRedes extends AppCompatActivity {
         // Botón para Precio 1
         Button btnPrecio1R = findViewById(R.id.btnPrecio1R);
         btnPrecio1R.setOnClickListener(v -> {
+            precioSeleccionado = 6;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
 // Botón para Precio 2
         Button btnPrecio2R = findViewById(R.id.btnPrecio2R);
         btnPrecio2R.setOnClickListener(v -> {
+            precioSeleccionado = 25;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
 // Botón para Precio 3
         Button btnPrecio3R = findViewById(R.id.btnPrecio3R);
         btnPrecio3R.setOnClickListener(v -> {
+            precioSeleccionado = 60;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
 // Botón para Precio 4
         Button btnPrecio4R = findViewById(R.id.btnPrecio4R);
         btnPrecio4R.setOnClickListener(v -> {
+            precioSeleccionado = 11;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
 // Botón para Precio 5
         Button btnPrecio5R = findViewById(R.id.btnPrecio5R);
         btnPrecio5R.setOnClickListener(v -> {
+            precioSeleccionado = 15;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
 // Botón para Precio 6
         Button btnPrecio6R = findViewById(R.id.btnPrecio6R);
         btnPrecio6R.setOnClickListener(v -> {
+            precioSeleccionado = 30;
             Intent intent = new Intent(MenuRedes.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
