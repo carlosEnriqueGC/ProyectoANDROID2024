@@ -59,19 +59,17 @@ public class PantallaDeRegistrosCodigos extends AppCompatActivity {
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    int idColumnIndex = cursor.getColumnIndexOrThrow("ID_codigo");
                     int tipoColumnIndex = cursor.getColumnIndexOrThrow("Tipo_codigo");
                     int precioColumnIndex = cursor.getColumnIndexOrThrow("Precio_codigo");
                     int secuenciaColumnIndex = cursor.getColumnIndexOrThrow("Secuencia_codigo");
                     int estadoColumnIndex = cursor.getColumnIndexOrThrow("estado_codigo");
 
-                    int id = cursor.getInt(idColumnIndex);
                     String tipo = cursor.getString(tipoColumnIndex);
                     int precio = cursor.getInt(precioColumnIndex);
                     String secuencia = cursor.getString(secuenciaColumnIndex);
                     String estado = cursor.getString(estadoColumnIndex);
 
-                    codigoUList.add(new CodigoU(id, tipo, precio, secuencia, estado));
+                    codigoUList.add(new CodigoU(tipo, precio, secuencia, estado));
                 } while (cursor.moveToNext());
             }
         } finally {

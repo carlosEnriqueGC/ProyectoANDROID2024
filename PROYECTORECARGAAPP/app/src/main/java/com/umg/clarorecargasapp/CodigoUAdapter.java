@@ -25,7 +25,6 @@ public class CodigoUAdapter extends RecyclerView.Adapter<CodigoUAdapter.CodigoUV
     @Override
     public void onBindViewHolder(@NonNull CodigoUViewHolder holder, int position) {
         CodigoU codigoU = codigoUList.get(position);
-        holder.codigoTextView.setText(String.valueOf(codigoU.getID_codigo())); // Mostrar el ID
         holder.tipoTextView.setText(codigoU.getTipo_codigo()); // Método que debes implementar
         holder.precioTextView.setText(String.valueOf(codigoU.getPrecio_codigo())); // Método que debes implementar
         holder.secuenciaTextView.setText(codigoU.getSecuencia_codigo()); // Método que debes implementar
@@ -38,7 +37,6 @@ public class CodigoUAdapter extends RecyclerView.Adapter<CodigoUAdapter.CodigoUV
     }
 
     public static class CodigoUViewHolder extends RecyclerView.ViewHolder {
-        TextView codigoTextView;
         TextView tipoTextView; // Cambiado
         TextView precioTextView; // Cambiado
         TextView secuenciaTextView; // Cambiado
@@ -46,7 +44,6 @@ public class CodigoUAdapter extends RecyclerView.Adapter<CodigoUAdapter.CodigoUV
 
         public CodigoUViewHolder(@NonNull View itemView) {
             super(itemView);
-            codigoTextView = itemView.findViewById(R.id.codigoCUTextView); // Cambiado
             tipoTextView = itemView.findViewById(R.id.tipoCUTextView); // Cambiado
             precioTextView = itemView.findViewById(R.id.precioCUTextView); // Cambiado
             secuenciaTextView = itemView.findViewById(R.id.secuenciaCUTextView); // Cambiado

@@ -20,6 +20,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuInternet extends AppCompatActivity {
 
+    String tipo = "Internet";
+    private int precioSeleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,43 +43,64 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio1 = findViewById(R.id.btnPrecio1);
         btnPrecio1.setOnClickListener(v -> {
+            precioSeleccionado = 6;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio2 = findViewById(R.id.btnPrecio2);
         btnPrecio2.setOnClickListener(v -> {
+            precioSeleccionado = 11;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio3 = findViewById(R.id.btnPrecio3);
         btnPrecio3.setOnClickListener(v -> {
+            precioSeleccionado = 16;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio4 = findViewById(R.id.btnPrecio4);
         btnPrecio4.setOnClickListener(v -> {
+            precioSeleccionado = 12; // este en realidad es 11 pero para que se distinga la recarga se coloca 12
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio5 = findViewById(R.id.btnPrecio5);
         btnPrecio5.setOnClickListener(v -> {
+            precioSeleccionado = 33;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio6 = findViewById(R.id.btnPrecio6);
         btnPrecio6.setOnClickListener(v -> {
+            precioSeleccionado = 55;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 
         Button btnPrecio7 = findViewById(R.id.btnPrecio7);
         btnPrecio7.setOnClickListener(v -> {
+            precioSeleccionado = 110;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("precio", precioSeleccionado);
             startActivity(intent);
         });
 

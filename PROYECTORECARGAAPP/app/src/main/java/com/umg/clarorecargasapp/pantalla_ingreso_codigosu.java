@@ -169,6 +169,13 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
             }
         });
 
+        eliminarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteCodeDialog();  // Llama al nuevo diálogo de eliminación
+            }
+        });
+
     }
 
     private void resetComponents(EditText precioEditText, EditText secuenciaEditText, Spinner spinnerEstado, Spinner spinnerTipo) {
@@ -420,5 +427,116 @@ public class pantalla_ingreso_codigosu extends AppCompatActivity {
         // Actualiza usando el ID del código
         db.update("tbl_codigosRecarga", values, "ID_codigo = ?", new String[]{String.valueOf( storeId)});
         db.close();
+    }
+
+    // Nuevo método para mostrar el diálogo de eliminación
+    private void showDeleteCodeDialog() {
+        // Crear el diálogo
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_seleccionar_codigo_eliminar); // Referencia al nuevo layout
+
+        // Referencias a los componentes del diálogo
+        final Spinner spinnerCodigos = dialog.findViewById(R.id.spinnerCodigosE);
+        final Spinner spinnerPrecio = dialog.findViewById(R.id.spinnerPrecioE);
+        final Button btnSeleccionar = dialog.findViewById(R.id.btnSeleccionarE);
+        final Button btnCancelar = dialog.findViewById(R.id.btnCancelarE);
+
+        // Adaptador para poblar el spinner con tipos de código
+        ArrayAdapter<String> adapterCodigos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getTipoCodigoRecarga());
+        adapterCodigos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCodigos.setAdapter(adapterCodigos);
+
+        // Adaptador vacío para los precios, se llenará cuando se seleccione un tipo de código
+        ArrayAdapter<String> adapterPrecios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
+        adapterPrecios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPrecio.setAdapter(adapterPrecios);
+        spinnerPrecio.setEnabled(false); // El spinner de precios se habilita tras seleccionar un código
+
+        // Listener para el spinner de códigos
+        spinnerCodigos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCode = spinnerCodigos.getSelectedItem().toString();
+                spinnerPrecio.setEnabled(true); // Habilita el spinner de precios
+
+                // Obtener y mostrar los precios según el tipo de código seleccionado
+                ArrayList<String> preciosFiltrados = getPreciosRecargaPorTipo(selectedCode);
+                ArrayAdapter<String> adapterPreciosFiltrados = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, preciosFiltrados);
+                adapterPreciosFiltrados.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerPrecio.setAdapter(adapterPreciosFiltrados);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spinnerPrecio.setEnabled(false);
+            }
+        });
+
+        // Acción para cuando el usuario selecciona eliminar
+        btnSeleccionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selectedCode = spinnerCodigos.getSelectedItem().toString();
+                String selectedPrecio = spinnerPrecio.getSelectedItem().toString();
+                showConfirmationDialog(selectedCode, selectedPrecio);
+                dialog.dismiss();
+            }
+        });
+
+        // Acción para cancelar
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss(); // Cerrar el diálogo si se cancela
+                precioEditText.setEnabled(false);
+                secuenciaEditText.setEnabled(false);
+                spinnerEstado.setEnabled(false);
+                spinnerTipo.setEnabled(false);
+            }
+        });
+
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    private void showConfirmationDialog(String selectedCode, String selectedPrecio) {
+        new AlertDialog.Builder(pantalla_ingreso_codigosu.this)
+                .setTitle("Confirmar Eliminación")
+                .setMessage("¿Está seguro que desea eliminar el código seleccionado?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Llamar al método para eliminar el registro
+                        deleteCodeData(selectedCode, Integer.parseInt(selectedPrecio));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Eliminación cancelada.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+    }
+
+
+    // Método para eliminar el registro de la base de datos
+    private void deleteCodeData(String code, int price) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try {
+            String priceString = String.valueOf(price);
+
+            // Ejecutar la consulta de eliminación con los parámetros correctos
+            int rowsDeleted = db.delete("tbl_codigosRecarga", "Tipo_codigo = ? AND Precio_codigo = ?", new String[]{code, priceString});
+
+            if (rowsDeleted > 0) {
+                Toast.makeText(getApplicationContext(), "Registro eliminado correctamente.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "No se encontró el registro a eliminar.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error al eliminar el código: " + e.getMessage());
+        } finally {
+            db.close();
+        }
     }
 }
