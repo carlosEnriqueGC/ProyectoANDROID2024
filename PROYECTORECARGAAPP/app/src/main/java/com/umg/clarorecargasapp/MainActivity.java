@@ -2,12 +2,15 @@ package com.umg.clarorecargasapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -15,19 +18,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.content.SharedPreferences;
-import androidx.drawerlayout.widget.DrawerLayout;
+import android.Manifest;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
-    private DrawerLayout drawerLayout;
+    private boolean isCallPermissionGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        // Verificar si ya se han concedido los permisos
+        if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            isCallPermissionGranted = true; // Si ya se tiene permiso
+        }
 
         // Configurar la base de datos
         DBHelper dbHelper = new DBHelper(this);
@@ -132,4 +142,24 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean(KEY_FIRST_LAUNCH, true);
         editor.apply();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults); // Llama al método de la clase base
+
+        if (requestCode == 1) {
+            if (grantResults.length > 0) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    isCallPermissionGranted = true;
+                    Toast.makeText(this, "Permiso de llamada concedido.", Toast.LENGTH_SHORT).show();
+                } else {
+                    isCallPermissionGranted = false;
+                    Toast.makeText(this, "Permiso de llamada denegado. No podrás realizar llamadas.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Error en la solicitud de permisos.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
+
