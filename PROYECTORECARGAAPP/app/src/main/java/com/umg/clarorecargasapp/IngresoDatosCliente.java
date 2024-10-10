@@ -1,21 +1,21 @@
 package com.umg.clarorecargasapp;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity; // Para el posicionamiento del Toast
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -156,6 +156,7 @@ public class IngresoDatosCliente extends AppCompatActivity {
     }
 
     private void showSelectStoreDialog(String secuencia, String phoneNumber) {
+
         // Crear el diálogo
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_buscar_pin);
@@ -176,12 +177,25 @@ public class IngresoDatosCliente extends AppCompatActivity {
             int pin = loadStorePin(selectedStore); // Método que busca el PIN basado en la tienda
             if (pin != -1) {
                 // Concatenar el PIN y mostrar el mensaje final
-                String mensajeFinal = secuencia + phoneNumber + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
-                new AlertDialog.Builder(IngresoDatosCliente.this)
-                        .setTitle("Secuencia Generada")
-                        .setMessage(mensajeFinal)
-                        .setPositiveButton("OK", null)
-                        .show();
+               String mensajeFinal = secuencia + phoneNumber + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + Uri.encode(mensajeFinal)));
+
+                // Verificar el permiso de llamada
+                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // Si no se tiene el permiso, solicitarlo
+                    Toast.makeText(IngresoDatosCliente.this, "No tienes permisos, regresando a la pantalla principal.", Toast.LENGTH_SHORT).show();
+
+                    // Iniciar MainActivity
+                    Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // Finalizar la actividad actual
+
+                } else {
+                    // Si ya tiene permiso, realizar la llamada
+                    startActivity(callIntent);
+                }
             } else {
                 Toast.makeText(IngresoDatosCliente.this, "No se encontró el PIN para la tienda seleccionada.", Toast.LENGTH_SHORT).show();
             }
@@ -193,8 +207,8 @@ public class IngresoDatosCliente extends AppCompatActivity {
         // Configura el diálogo para que no se cancele tocando fuera
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-    }
 
+    }
 
     // Método para obtener nombres de tiendas desde la base de datos
     private List<String> getStoreNames() {
