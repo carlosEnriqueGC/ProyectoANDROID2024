@@ -56,8 +56,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "('Redes sociales', 60, '*905*5*3*', 'Activo'), " +
                 "('Redes sociales', 11, '*905*5*4*', 'Activo'), " +
                 "('Redes sociales', 15, '*905*5*5*', 'Activo'), " +
-                "('Redes sociales', 30, '*905*5*6*', 'Activo');");
-
+                "('Redes sociales', 30, '*905*5*6*', 'Activo'),"+
+                 "('Saldo', 0, '*777*1*', 'Activo');");
     }
     // Actualización de la base de datos si cambia la versión
     @Override
