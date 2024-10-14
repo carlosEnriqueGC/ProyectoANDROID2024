@@ -10,40 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity; // Para el posicionamiento del Toast
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.text.TextUtils;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import java.util.ArrayList;
-import java.util.List;
 public class IngresoDatosClienteES extends AppCompatActivity {
 
-    private String opcion;
-    private int precio;
     private EditText editTextTelefono;
     private DBHelper dbHelper;
-    private String numeroTelefono; // Dec
+
+    String tipo = "Saldo";
+    private String NumeroCliente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +31,11 @@ public class IngresoDatosClienteES extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         // Inicializar el EditText y el botón desde el XML
         editTextTelefono = findViewById(R.id.etPhoneNumber2);
         Button btnConfirmar = findViewById(R.id.btnContinuar);
-
-        // Inicializar el EditText y el botón desde el XML
+        Button btnVolver = findViewById(R.id.btnRegresar);
 
         // Acción al hacer clic en el botón "Continuar"
         btnConfirmar.setOnClickListener(v -> {
@@ -79,16 +56,22 @@ public class IngresoDatosClienteES extends AppCompatActivity {
 
             // Verificar si el texto contiene solo números
             if (phoneNumber.matches("\\d+")) {
-                // Guardar el número de teléfono en una variable para usar más adelante
-                numeroTelefono = phoneNumber;
-                Toast.makeText(IngresoDatosClienteES.this, "Número guardado correctamente: " + numeroTelefono, Toast.LENGTH_SHORT).show();
 
-                // Redirigir a la siguiente interfaz (otra actividad)
+                NumeroCliente = phoneNumber; //guardamos el numero del cliente
+
+                // Redirigir a la siguiente interfaz
                 Intent intent = new Intent(IngresoDatosClienteES.this, IngresoDePrecioES.class);
+                intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+                intent.putExtra("numero", NumeroCliente); //Aqui pasa el numero
                 startActivity(intent);
             } else {
                 Toast.makeText(IngresoDatosClienteES.this, "Los caracteres no son válidos", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnVolver.setOnClickListener(v -> {
+            Intent intent = new Intent(IngresoDatosClienteES.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 }

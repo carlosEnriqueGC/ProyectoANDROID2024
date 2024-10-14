@@ -1,7 +1,10 @@
 package com.umg.clarorecargasapp;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,8 +45,12 @@ import java.util.List;
 
 public class IngresoDePrecioES extends AppCompatActivity {
     private EditText editTextPrecio; // Campo para ingresar el precio
-    private String precio; // Variable para almacenar el precio
     private DBHelper dbHelper;
+
+    private String opcion;
+    private String numero;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,67 +63,85 @@ public class IngresoDePrecioES extends AppCompatActivity {
 
         });
 
-        // Inicializar el EditText y el botón desde el XML
-        editTextPrecio = findViewById(R.id.editTextNumber); // Cambia esto por el ID de tu EditText para precio
-        Button btnConfirmar = findViewById(R.id.btnConfirmarS);
-        Button btnCancelar = findViewById(R.id.btnCancelarS);
-        dbHelper = new DBHelper(this); // Inicializar DBHelper
+        dbHelper = new DBHelper(this);
 
-        // Acción al hacer clic en el botón "Confirmar"
+        // Obtener datos del Intent
+        opcion = getIntent().getStringExtra("opcion");
+        numero = getIntent().getStringExtra("numero"); // Ahora obtienes el número correctamente como String
+
+        // aqui obtenemos los botones que estan en el XML
+        editTextPrecio = findViewById(R.id.editTextNumber);
+        Button btnConfirmar = findViewById(R.id.btnConfirmarS);
+
+        Button btnCancelarS = findViewById(R.id.btnCancelarS);
+        btnCancelarS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crea un cuadro de diálogo (AlertDialog)
+                new AlertDialog.Builder(IngresoDePrecioES.this)
+                        .setTitle("Cancelar")
+                        .setMessage("¿Deseas cancelar?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'Sí', navega al menú
+                                Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class); // Asegúrate de reemplazar MenuActivity con tu actividad de menú real
+                                startActivity(intent);
+                                finish(); // Opcional: cierra la actividad actual
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Si el usuario elige 'No', simplemente cierra el diálogo
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
+
         btnConfirmar.setOnClickListener(v -> {
-            // Obtener el precio del EditText
-            String precioInput = editTextPrecio.getText().toString().trim();
+            // Obtener el número de teléfono del EditText
+            String Price = editTextPrecio.getText().toString().trim();
 
             // Verificar si el EditText está vacío
-            if (TextUtils.isEmpty(precioInput)) {
+            if (TextUtils.isEmpty(Price)) {
                 Toast.makeText(IngresoDePrecioES.this, "El campo no puede estar vacío", Toast.LENGTH_SHORT).show();
+                return; // Salir si está vacío
+            }
+
+            // Verificar la longitud del precio si es menor o igual a 3 digitos
+            if (Price.length() > 3) {
+                Toast.makeText(IngresoDePrecioES.this, "El precio no puede tener más de 3 dígitos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             // Verificar si el texto contiene solo números
-            if (precioInput.matches("\\d+")) {
-                // Guardar el precio en la variable
-                precio = precioInput;
-                Toast.makeText(IngresoDePrecioES.this, "Precio guardado correctamente: " + precio, Toast.LENGTH_SHORT).show();
-
-                // Buscar la secuencia correspondiente
-                String tipo = "Saldo"; // Cambia esto por el tipo que necesites
-                String secuencia = buscarSecuencia(tipo, Integer.parseInt(precio));
+            if (Price.matches("\\d+")) {
+                // Buscar la secuencia correspondiente al tipo y precio seleccionados
+                String secuencia = buscarSecuencia(opcion);
                 if (secuencia != null) {
-                    Toast.makeText(IngresoDePrecioES.this, "Secuencia encontrada: " + secuencia, Toast.LENGTH_SHORT).show();
+                    // Mostrar el diálogo para seleccionar la tienda
+                    showSelectStoreDialog(secuencia, Price);
                 } else {
-                    Toast.makeText(IngresoDePrecioES.this, "No se encontró secuencia para el precio ingresado.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IngresoDePrecioES.this, "No se encontró la secuencia para el tipo", Toast.LENGTH_SHORT).show();
                 }
-            } else {
+            }else {
                 Toast.makeText(IngresoDePrecioES.this, "Los caracteres no son válidos", Toast.LENGTH_SHORT).show();
             }
         });
-
-        // Configura el botón de cancelar
-        btnCancelar.setOnClickListener(v -> {
-            // Crea un cuadro de diálogo (AlertDialog)
-            new AlertDialog.Builder(IngresoDePrecioES.this)
-                    .setTitle("Cancelar")
-                    .setMessage("¿Deseas cancelar?")
-                    .setPositiveButton("Sí", (dialog, which) -> {
-                        // Si el usuario elige 'Sí', navega al menú
-                        Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class); // Cambia esto por tu actividad de menú real
-                        startActivity(intent);
-                        finish(); // Opcional: cierra la actividad actual
-                    })
-                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss()) // Si elige 'No', cierra el diálogo
-                    .show();
-        });
     }
 
-    private String buscarSecuencia(String tipo, int precio) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase(); // Usar el método adecuado para lectura
+    private String buscarSecuencia(String tipo) {
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         String secuencia = null;
 
-        // Consulta SQL para obtener la secuencia
-        String query = "SELECT Secuencia_codigo FROM tbl_codigosRecarga WHERE Saldo = ? AND Precio_codigo = ?";
+        // Consulta SQL solo para obtener la secuencia filtrando por tipo
+        String query = "SELECT Secuencia_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ?";
         try {
-            Cursor cursor = db.rawQuery(query, new String[]{tipo, String.valueOf(precio)});
+            Cursor cursor = db.rawQuery(query, new String[]{tipo});
 
             // Comprobar si se obtuvo alguna fila
             if (cursor != null) {
@@ -128,24 +153,23 @@ public class IngresoDePrecioES extends AppCompatActivity {
                         Log.e("DB Error", "Columna 'Secuencia_codigo' no encontrada.");
                     }
                 } else {
-                    Log.e("DB Error", "No se encontraron resultados para tipo: " + tipo + ", precio: " + precio);
+                    Log.e("DB Error", "No se encontraron resultados para tipo: " + tipo);
                 }
-                cursor.close(); // Cerrar el cursor después de usarlo
+                cursor.close();
             } else {
                 Log.e("DB Error", "Cursor es nulo.");
             }
         } catch (Exception e) {
             Log.e("DB Error", "Error al ejecutar la consulta: " + e.getMessage());
         } finally {
-            db.close(); // Asegúrate de cerrar la base de datos al final
+            db.close();
         }
 
-        return secuencia; // Retornar la secuencia encontrada
+        return secuencia;
     }
 
+    private void showSelectStoreDialog(String secuencia, String Price) {
 
-
-    private void showSelectStoreDialog(String secuencia, String phoneNumber) {
         // Crear el diálogo
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_buscar_pin);
@@ -166,12 +190,25 @@ public class IngresoDePrecioES extends AppCompatActivity {
             int pin = loadStorePin(selectedStore); // Método que busca el PIN basado en la tienda
             if (pin != -1) {
                 // Concatenar el PIN y mostrar el mensaje final
-                String mensajeFinal = secuencia + phoneNumber + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
-                new AlertDialog.Builder(IngresoDePrecioES.this)
-                        .setTitle("Secuencia Generada")
-                        .setMessage(mensajeFinal)
-                        .setPositiveButton("OK", null)
-                        .show();
+                String mensajeFinal = secuencia + numero + "*" + Price + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + Uri.encode(mensajeFinal)));
+
+                // Verificar el permiso de llamada
+                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // Si no se tiene el permiso, solicitarlo
+                    Toast.makeText(IngresoDePrecioES.this, "No tienes permisos, regresando a la pantalla principal.", Toast.LENGTH_SHORT).show();
+
+                    // Iniciar MainActivity
+                    Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // Finalizar la actividad actual
+
+                } else {
+                    // Si ya tiene permiso, realizar la llamada
+                    startActivity(callIntent);
+                }
             } else {
                 Toast.makeText(IngresoDePrecioES.this, "No se encontró el PIN para la tienda seleccionada.", Toast.LENGTH_SHORT).show();
             }
@@ -183,8 +220,8 @@ public class IngresoDePrecioES extends AppCompatActivity {
         // Configura el diálogo para que no se cancele tocando fuera
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-    }
 
+    }
 
     // Método para obtener nombres de tiendas desde la base de datos
     private List<String> getStoreNames() {
