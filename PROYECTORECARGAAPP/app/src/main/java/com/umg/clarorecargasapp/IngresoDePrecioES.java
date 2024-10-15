@@ -41,6 +41,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class IngresoDePrecioES extends AppCompatActivity {
@@ -187,27 +188,37 @@ public class IngresoDePrecioES extends AppCompatActivity {
         // Acción para cuando el usuario selecciona una tienda
         btnSeleccionar.setOnClickListener(v -> {
             String selectedStore = spinnerTiendas.getSelectedItem().toString();
-            int pin = loadStorePin(selectedStore); // Método que busca el PIN basado en la tienda
+            int pin = loadStorePin(selectedStore); // Obtener el PIN
+
             if (pin != -1) {
-                // Concatenar el PIN y mostrar el mensaje final
-                String mensajeFinal = secuencia + numero + "*" + Price + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
+                // Verificar estados
+                String estadoSecuencia = buscarEstadoSecuencia(opcion); // Obtener estado de la secuencia
+                String estadoPin = buscarEstadoPin(selectedStore); // Obtener estado del PIN
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + Uri.encode(mensajeFinal)));
-
-                // Verificar el permiso de llamada
-                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // Si no se tiene el permiso, solicitarlo
-                    Toast.makeText(IngresoDePrecioES.this, "No tienes permisos, regresando a la pantalla principal.", Toast.LENGTH_SHORT).show();
-
-                    // Iniciar MainActivity
-                    Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // Finalizar la actividad actual
-
+                if ("Inactivo".equals(estadoSecuencia) || "Suspendido".equals(estadoSecuencia) ||
+                        "Inactivo".equals(estadoPin) || "Suspendido".equals(estadoPin)) {
+                    // Mostrar diálogo de advertencia
+                    new AlertDialog.Builder(this)
+                            .setTitle("Estado Inactivo")
+                            .setMessage("La secuencia o el PIN están inactivos o suspendidos. No se puede realizar la llamada.")
+                            .setPositiveButton("OK", null)
+                            .show();
                 } else {
-                    // Si ya tiene permiso, realizar la llamada
-                    startActivity(callIntent);
+                    // Concatenar el PIN y realizar la llamada
+                    String mensajeFinal = secuencia + numero + "*" + Price + "*" + pin + "*1#"; // Agregar '*' y finalizar con '*1#'
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + Uri.encode(mensajeFinal)));
+
+                    // Verificar el permiso de llamada
+                    if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(IngresoDePrecioES.this, "No tienes permisos, regresando a la pantalla principal.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class);
+                        startActivity(intent);
+                        finish(); // Finalizar la actividad actual
+                    } else {
+                        startActivity(callIntent); // Realizar la llamada
+                    }
                 }
             } else {
                 Toast.makeText(IngresoDePrecioES.this, "No se encontró el PIN para la tienda seleccionada.", Toast.LENGTH_SHORT).show();
@@ -223,6 +234,7 @@ public class IngresoDePrecioES extends AppCompatActivity {
 
     }
 
+    // Método para obtener nombres de tiendas desde la base de datos
     // Método para obtener nombres de tiendas desde la base de datos
     private List<String> getStoreNames() {
         List<String> storeNames = new ArrayList<>();
@@ -282,6 +294,50 @@ public class IngresoDePrecioES extends AppCompatActivity {
         }
 
         return pin;
+    }
+
+    private String buscarEstadoSecuencia(String tipo) {
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String estado = null;
+
+        String query = "SELECT estado_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ?";
+        try (Cursor cursor = db.rawQuery(query, new String[]{tipo})) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("estado_codigo");
+                if (columnIndex != -1) {
+                    estado = cursor.getString(columnIndex);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DB Error", "Error al ejecutar la consulta: " + e.getMessage());
+        } finally {
+            db.close();
+        }
+
+        return estado;
+    }
+
+    private String buscarEstadoPin(String storeName) {
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String estado = null;
+
+        String query = "SELECT Estado FROM tbl_datosTienda WHERE Nombre_tienda = ?";
+        try (Cursor cursor = db.rawQuery(query, new String[]{storeName})) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("Estado");
+                if (columnIndex != -1) {
+                    estado = cursor.getString(columnIndex);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DB Error", "Error al ejecutar la consulta: " + e.getMessage());
+        } finally {
+            db.close();
+        }
+
+        return estado;
     }
 
 }
