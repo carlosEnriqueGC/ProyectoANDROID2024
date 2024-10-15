@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -35,8 +36,8 @@ public class MenuInternet extends AppCompatActivity {
         });
 
         // Encuentra el botón y configúralo para regresar a la actividad principal
-        Button btnVolver = findViewById(R.id.btnVolver);
-        btnVolver.setOnClickListener(v -> {
+        ImageButton btnRegresar = findViewById(R.id.btnVolverI);
+        btnRegresar.setOnClickListener(v -> {
             Intent intent = new Intent(MenuInternet.this, MainActivity.class);
             startActivity(intent);
         });

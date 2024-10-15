@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.content.SharedPreferences;
 import android.Manifest;
@@ -71,33 +72,33 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Encuentra los botones y configúralos para iniciar las nuevas actividades
-        Button btnInternet = findViewById(R.id.btnInternet);
-        btnInternet.setOnClickListener(v -> {
+        // Encuentra los botones linearlayout
+        LinearLayout btnInternetLayout = findViewById(R.id.btnInternetLayout);
+        btnInternetLayout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MenuInternet.class);
             startActivity(intent);
         });
 
-        Button btnTodoIncluido = findViewById(R.id.btnTodoIncluido);
-        btnTodoIncluido.setOnClickListener(v -> {
+        LinearLayout btnTodoIncluidoLayout = findViewById(R.id.btnTodoIncluidoLayout);
+        btnTodoIncluidoLayout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MenuTodoIncluido.class);
             startActivity(intent);
         });
 
-        Button btnMinutos = findViewById(R.id.btnMinutos);
-        btnMinutos.setOnClickListener(v -> {
+        LinearLayout btnMinutosLayout = findViewById(R.id.btnMinutosLayout);
+        btnMinutosLayout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MenuMinutos.class);
             startActivity(intent);
         });
 
-        Button btnRedes = findViewById(R.id.btnRedes);
-        btnRedes.setOnClickListener(v -> {
+        LinearLayout btnRedesLayout = findViewById(R.id.btnRedesLayout);
+        btnRedesLayout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MenuRedes.class);
             startActivity(intent);
         });
 
-        Button btnSaldo = findViewById(R.id.btnSaldo);
-        btnSaldo.setOnClickListener(v -> {
+        LinearLayout btnSaldoLayout = findViewById(R.id.btnSaldoLayout);
+        btnSaldoLayout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, IngresoDatosClienteES.class);
             startActivity(intent);
         });

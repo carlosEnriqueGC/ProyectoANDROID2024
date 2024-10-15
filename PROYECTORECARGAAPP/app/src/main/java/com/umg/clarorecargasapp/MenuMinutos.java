@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -31,8 +32,8 @@ public class MenuMinutos extends AppCompatActivity {
         });
 
         // Encuentra el botón y configúralo para regresar a la actividad principal
-        Button btnVolver = findViewById(R.id.btnVolver3);
-        btnVolver.setOnClickListener(v -> {
+        ImageButton btnRegresar = findViewById(R.id.btnVolverM);
+        btnRegresar.setOnClickListener(v -> {
             Intent intent = new Intent(MenuMinutos.this, MainActivity.class);
             startActivity(intent);
         });

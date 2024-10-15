@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -47,8 +48,8 @@ public class MenuTodoIncluido extends AppCompatActivity {
         });
 
 // Encuentra el botón y configúralo para regresar a la actividad principal
-        Button btnVolver = findViewById(R.id.btnVolver2);
-        btnVolver.setOnClickListener(v -> {
+        ImageButton btnRegresar = findViewById(R.id.btnVolverTI);
+        btnRegresar.setOnClickListener(v -> {
             Intent intent = new Intent(MenuTodoIncluido.this, MainActivity.class);
             startActivity(intent);
         });

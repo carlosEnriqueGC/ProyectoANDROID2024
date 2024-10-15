@@ -8,6 +8,22 @@
     android:background="#FFFFFF"
     tools:context=".MenuInternet">
 
+    <ImageButton
+        android:id="@+id/btnVolverI"
+        android:layout_width="71dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/descripcion_boton"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.326"
+        app:srcCompat="@drawable/icon_regresar_atras" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="171dp"
@@ -34,20 +50,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/precio" />
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="71dp"
-        android:layout_height="70dp"
-        android:background="@drawable/botonvolver"
-        android:text="."
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
-
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="345dp"
         android:layout_height="409dp"
         android:layout_marginStart="45dp"
@@ -73,8 +77,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio1"
@@ -97,8 +101,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio2"
@@ -121,8 +125,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio3"
@@ -145,8 +149,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio4"
@@ -169,8 +173,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio5"
@@ -193,8 +197,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio6"
@@ -217,8 +221,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio7"
@@ -256,8 +260,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.174" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
