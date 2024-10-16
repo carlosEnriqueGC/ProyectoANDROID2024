@@ -42,6 +42,7 @@
         android:hint="Presione aqui"
         android:inputType="phone"
         android:padding="16dp"
+        android:background="@drawable/spinner_border"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
