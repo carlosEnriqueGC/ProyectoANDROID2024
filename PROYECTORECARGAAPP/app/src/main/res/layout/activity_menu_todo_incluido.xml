@@ -7,18 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".MenuTodoIncluido">
 
-    <Button
-        android:id="@+id/btnVolver2"
+    <ImageButton
+        android:id="@+id/btnVolverTI"
         android:layout_width="71dp"
         android:layout_height="70dp"
-        android:background="@drawable/botonvolver"
-        android:text="."
-        android:textSize="20sp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/descripcion_boton"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.326"
+        app:srcCompat="@drawable/icon_regresar_atras" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -89,7 +92,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio1TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
@@ -114,7 +117,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio2TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
@@ -139,7 +142,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio3TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
@@ -163,7 +166,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio4TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
@@ -188,7 +191,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio5TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
@@ -212,7 +215,7 @@
 
                 <Button
                     android:id="@+id/btnPrecio6TI"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
