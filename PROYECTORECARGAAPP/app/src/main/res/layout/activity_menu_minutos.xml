@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MenuMinutos">
 
     <ImageButton
@@ -89,8 +90,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio1M"
@@ -113,8 +114,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio2M"
@@ -138,8 +139,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio3M"
@@ -162,8 +163,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio4M"
@@ -188,8 +189,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPrecio5M"
@@ -208,8 +209,6 @@
                     app:srcCompat="@drawable/informacion" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".IngresoDatosClienteES">
 
     <Button
@@ -27,11 +28,11 @@
         android:id="@+id/etPhoneNumber2"
         android:layout_width="280dp"
         android:layout_height="67dp"
+        android:background="@drawable/spinner_border"
         android:ems="10"
         android:hint="Presione aqui"
         android:inputType="phone"
         android:padding="16dp"
-        android:background="@drawable/spinner_border"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

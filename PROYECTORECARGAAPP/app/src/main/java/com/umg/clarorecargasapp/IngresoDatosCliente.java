@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -187,7 +188,12 @@ public class IngresoDatosCliente extends AppCompatActivity {
                     new AlertDialog.Builder(this)
                             .setTitle("Estado Inactivo")
                             .setMessage("La secuencia o el PIN están inactivos o suspendidos. No se puede realizar la llamada.")
-                            .setPositiveButton("OK", null)
+                            .setPositiveButton("OK", (dialogInterface, i) -> {
+                                // Redirigir a MainActivity después de que el usuario presiona "OK"
+                                Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class);
+                                startActivity(intent);
+                                finish(); // Finaliza la actividad actual
+                            })
                             .show();
                 } else {
                     // Concatenar el PIN y mostrar el mensaje final
@@ -204,6 +210,11 @@ public class IngresoDatosCliente extends AppCompatActivity {
                         finish(); // Finalizar la actividad actual
                     } else {
                         startActivity(callIntent); // Realizar la llamada
+                        new Handler().postDelayed(() -> {
+                            Intent intent = new Intent(IngresoDatosCliente.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Finalizar la actividad actual
+                        }, 1000); // 5000 milisegundos = 5 segundos
                     }
                 }
             } else {

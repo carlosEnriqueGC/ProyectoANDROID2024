@@ -16,61 +16,80 @@
         <activity
             android:name=".PantallaDeRegistrosCodigos"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".pantalla_ingreso_codigosu"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".PantalladeRegistrosTienda"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".PantallaIngresoTienda"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MenuDesplegable"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".IngresoDePrecioES"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".IngresoDatosClienteES"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MenuRedes"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MenuMinutos"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MenuTodoIncluido"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".IngresoDatosCliente"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MenuInternet"
             android:screenOrientation="portrait"
+            android:resizeableActivity="true"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:resizeableActivity="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true"/>
 
 </manifest>

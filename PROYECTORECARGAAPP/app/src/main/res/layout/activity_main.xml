@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.429">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnInternetIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.631">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnMinutosIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.836">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnSaldoIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.635">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnRedesIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -173,7 +173,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnTodoIncluidoIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
