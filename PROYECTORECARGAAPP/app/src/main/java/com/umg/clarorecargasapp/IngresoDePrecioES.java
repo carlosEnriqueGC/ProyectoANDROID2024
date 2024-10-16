@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView; // Para personalizar el texto en el Toast
 import android.widget.Toast;
+import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -201,7 +202,12 @@ public class IngresoDePrecioES extends AppCompatActivity {
                     new AlertDialog.Builder(this)
                             .setTitle("Estado Inactivo")
                             .setMessage("La secuencia o el PIN están inactivos o suspendidos. No se puede realizar la llamada.")
-                            .setPositiveButton("OK", null)
+                            .setPositiveButton("OK", (dialogInterface, i) -> {
+                                // Redirigir a MainActivity después de que el usuario presiona "OK"
+                                Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class);
+                                startActivity(intent);
+                                finish(); // Finaliza la actividad actual
+                            })
                             .show();
                 } else {
                     // Concatenar el PIN y realizar la llamada
@@ -218,6 +224,11 @@ public class IngresoDePrecioES extends AppCompatActivity {
                         finish(); // Finalizar la actividad actual
                     } else {
                         startActivity(callIntent); // Realizar la llamada
+                        new Handler().postDelayed(() -> {
+                            Intent intent = new Intent(IngresoDePrecioES.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Finalizar la actividad actual
+                        }, 1000); // 5000 milisegundos = 5 segundos
                     }
                 }
             } else {
