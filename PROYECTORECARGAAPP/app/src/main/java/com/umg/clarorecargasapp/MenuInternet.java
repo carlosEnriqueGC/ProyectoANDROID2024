@@ -44,7 +44,7 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio1 = findViewById(R.id.btnPrecio1);
         btnPrecio1.setOnClickListener(v -> {
-            precioSeleccionado = 6;
+            precioSeleccionado = 7;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);
@@ -53,7 +53,7 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio2 = findViewById(R.id.btnPrecio2);
         btnPrecio2.setOnClickListener(v -> {
-            precioSeleccionado = 11;
+            precioSeleccionado = 12;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);
@@ -62,7 +62,7 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio3 = findViewById(R.id.btnPrecio3);
         btnPrecio3.setOnClickListener(v -> {
-            precioSeleccionado = 16;
+            precioSeleccionado = 18;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);
@@ -71,7 +71,7 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio4 = findViewById(R.id.btnPrecio4);
         btnPrecio4.setOnClickListener(v -> {
-            precioSeleccionado = 12; // este en realidad es 11 pero para que se distinga la recarga se coloca 12
+            precioSeleccionado = 15; // este en realidad es 11 pero para que se distinga la recarga se coloca 12
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);

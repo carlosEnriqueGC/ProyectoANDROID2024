@@ -40,7 +40,7 @@ public class MenuMinutos extends AppCompatActivity {
 
         Button btnPrecio1M = findViewById(R.id.btnPrecio1M);
         btnPrecio1M.setOnClickListener(v -> {
-            precioSeleccionado = 6;
+            precioSeleccionado = 7;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);
@@ -49,7 +49,7 @@ public class MenuMinutos extends AppCompatActivity {
 
         Button btnPrecio2M = findViewById(R.id.btnPrecio2M);
         btnPrecio2M.setOnClickListener(v -> {
-            precioSeleccionado = 11;
+            precioSeleccionado = 12;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
             intent.putExtra("precio", precioSeleccionado);

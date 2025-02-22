@@ -172,7 +172,7 @@
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
-                    android:text="Q11"
+                    android:text="Q12"
                     android:textSize="22sp" />
 
                 <ImageView
@@ -196,7 +196,7 @@
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#E4002B"
-                    android:text="Q15"
+                    android:text="Q16"
                     android:textSize="22sp" />
 
                 <ImageView
