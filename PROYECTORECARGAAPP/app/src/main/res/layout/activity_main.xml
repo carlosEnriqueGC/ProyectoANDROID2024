@@ -5,14 +5,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Opciones disponibles"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +64,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Internet"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -86,7 +98,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Minutos"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -120,7 +132,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Saldo"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -154,7 +166,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Redes"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -188,7 +200,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Todo Incluido"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -198,6 +210,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Recargas"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -209,8 +222,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="101dp"
-        android:layout_height="103dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -224,16 +237,17 @@
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="649dp"
-        android:background="#FFFFFF"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.066"
-        app:srcCompat="@drawable/menuprincipal" />
-
+        app:srcCompat="@drawable/icon_configuracion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
