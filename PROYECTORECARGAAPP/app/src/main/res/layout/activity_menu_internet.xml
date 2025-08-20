@@ -5,15 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MenuInternet">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btnVolverI"
         android:layout_width="71dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:background="#FFFFFF"
+        android:background="#01FFFFFF"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,6 +42,7 @@
         android:gravity="center"
         android:text="Precios"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -248,6 +259,7 @@
         android:layout_height="wrap_content"
         android:text="Internet"
         android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
