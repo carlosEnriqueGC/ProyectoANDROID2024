@@ -5,24 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".PantallaDeRegistrosCodigos">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btnRegregarPCU"
-        android:layout_width="61dp"
-        android:layout_height="59dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:background="#FFFFFF"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.037"
-        app:srcCompat="@drawable/regresar2" />
+        app:srcCompat="@drawable/icon_regresar" />
 
     <TextView
         android:id="@+id/tituloPrincipal4"
@@ -30,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Codigos claro"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,8 +53,9 @@
 
     <LinearLayout
         android:layout_width="383dp"
-        android:layout_height="645dp"
+        android:layout_height="0dp"
         android:layout_marginTop="110dp"
+        android:layout_marginBottom="24dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +76,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Tabla de registros"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -76,6 +90,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Tipo"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -85,6 +100,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Precio"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -94,6 +110,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="cadena"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -103,6 +120,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Estado"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
@@ -111,7 +129,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRegistros"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#FFFFFF" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

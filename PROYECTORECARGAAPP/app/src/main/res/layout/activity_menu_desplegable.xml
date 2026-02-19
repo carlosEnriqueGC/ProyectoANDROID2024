@@ -5,14 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F6F6"
     tools:context=".MenuDesplegable">
 
-    <!-- Botón para regresar -->
-
-    <!-- Título del menú -->
-
-    <!-- Botón para Datos de tienda -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -30,19 +34,21 @@
 
     <ImageButton
         android:id="@+id/btnVolverMD"
-        android:layout_width="61dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="16dp"
-        android:background="#F8F6F6"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.066"
-        app:srcCompat="@drawable/regresar2" />
+        app:srcCompat="@drawable/icon_regresar" />
 
     <TextView
         android:id="@+id/tituloMenu"
@@ -50,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Otras opciones"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

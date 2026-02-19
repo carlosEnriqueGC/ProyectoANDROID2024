@@ -5,15 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MenuRedes">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btnVolverR"
         android:layout_width="71dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:background="#FFFFFF"
+        android:background="#01FFFFFF"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,6 +41,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Precios"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -45,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Redes sociales"
+        android:textColor="#FFFFFF"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -66,175 +78,250 @@
         app:srcCompat="@drawable/precio" />
 
     <ScrollView
-        android:layout_width="345dp"
-        android:layout_height="409dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="41dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="350dp"
+        android:layout_height="480dp"
+        android:layout_marginTop="280dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.881">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
-            <!-- Botón Q6-->
+            <!-- FILA 1 -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnPrecio1R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q6"
-                    android:textSize="22sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
 
-                <ImageView
-                    android:id="@+id/info1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
 
+                        <Button
+                            android:id="@+id/btnPrecio1R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q6"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnPrecio2R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q25"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Botón Q25-->
+            <!-- FILA 2 -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnPrecio2R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q25"
-                    android:textSize="22sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
 
-                <ImageView
-                    android:id="@+id/info2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
 
+                        <Button
+                            android:id="@+id/btnPrecio3R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q60"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnPrecio4R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q12"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Botón Q60-->
+            <!-- FILA 3 -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnPrecio3R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q60"
-                    android:textSize="22sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
 
-                <ImageView
-                    android:id="@+id/info3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
 
+                        <Button
+                            android:id="@+id/btnPrecio5R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q16"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnPrecio6R"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="Q30"
+                            android:textColor="#000000"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Texto"
+                            android:textColor="#E4002B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-
-            <!-- Botón Q11-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnPrecio4R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q12"
-                    android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
-            </LinearLayout>
-            <!-- Botón Q15-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnPrecio5R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q16"
-                    android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
-            </LinearLayout>
-
-
-            <!-- Botón Q30-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="76dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnPrecio6R"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="#E4002B"
-                    android:text="Q30"
-                    android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
-            </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

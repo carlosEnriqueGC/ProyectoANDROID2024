@@ -5,8 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".pantalla_ingreso_codigosu">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -18,14 +28,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042"
-        app:srcCompat="@drawable/codigospin" />
+        app:srcCompat="@drawable/icon_registropin" />
 
     <TextView
         android:id="@+id/tituloPrincipal3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Registro de datos"
+        android:text="Datos de recarga"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -141,19 +152,21 @@
 
     <ImageButton
         android:id="@+id/btnVolverCU"
-        android:layout_width="61dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="16dp"
-        android:background="#FFFFFF"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.037"
-        app:srcCompat="@drawable/regresar2" />
+        app:srcCompat="@drawable/icon_regresar" />
 
     <LinearLayout
         android:id="@+id/btnVerRegistrosCU"
