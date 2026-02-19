@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
