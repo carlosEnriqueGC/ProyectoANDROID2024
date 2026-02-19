@@ -5,15 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MenuTodoIncluido">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoapp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btnVolverTI"
         android:layout_width="71dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:background="#FFFFFF"
+        android:background="#01FFFFFF"
         android:contentDescription="@string/descripcion_boton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Todo incluido"
         android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +68,7 @@
         android:gravity="center"
         android:text="Precios"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,13 +112,6 @@
                     android:text="Q12"
                     android:textSize="22sp" />
 
-                <ImageView
-                    android:id="@+id/info1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
             </LinearLayout>
 
             <!-- Botón Q15-->
@@ -124,13 +129,6 @@
                     android:backgroundTint="#E4002B"
                     android:text="Q16"
                     android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
 
             </LinearLayout>
 
@@ -150,13 +148,6 @@
                     android:text="Q35"
                     android:textSize="22sp" />
 
-                <ImageView
-                    android:id="@+id/info3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
             </LinearLayout>
             <!-- Botón Q55-->
             <LinearLayout
@@ -173,13 +164,6 @@
                     android:backgroundTint="#E4002B"
                     android:text="Q60"
                     android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
 
             </LinearLayout>
 
@@ -199,13 +183,6 @@
                     android:text="Q115"
                     android:textSize="22sp" />
 
-                <ImageView
-                    android:id="@+id/info5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
-
             </LinearLayout>
             <!-- Botón Q20-->
             <LinearLayout
@@ -222,13 +199,6 @@
                     android:backgroundTint="#E4002B"
                     android:text="Q20"
                     android:textSize="22sp" />
-
-                <ImageView
-                    android:id="@+id/info6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/informacion" />
 
             </LinearLayout>
 
