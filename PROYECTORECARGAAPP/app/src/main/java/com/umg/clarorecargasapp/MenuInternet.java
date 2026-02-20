@@ -22,7 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MenuInternet extends AppCompatActivity {
 
     String tipo = "Internet";
-    private int precioSeleccionado;
+    private int Identificador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,64 +44,72 @@ public class MenuInternet extends AppCompatActivity {
 
         Button btnPrecio1 = findViewById(R.id.btnPrecio1);
         btnPrecio1.setOnClickListener(v -> {
-            precioSeleccionado = 7;
+            Identificador = 1;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio2 = findViewById(R.id.btnPrecio2);
         btnPrecio2.setOnClickListener(v -> {
-            precioSeleccionado = 12;
+            Identificador = 2;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio3 = findViewById(R.id.btnPrecio3);
         btnPrecio3.setOnClickListener(v -> {
-            precioSeleccionado = 18;
+            Identificador = 3;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio4 = findViewById(R.id.btnPrecio4);
         btnPrecio4.setOnClickListener(v -> {
-            precioSeleccionado = 15; // este en realidad es 11 pero para que se distinga la recarga se coloca 12
+            Identificador = 4; // este en realidad es 11 pero para que se distinga la recarga se coloca 12
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio5 = findViewById(R.id.btnPrecio5);
         btnPrecio5.setOnClickListener(v -> {
-            precioSeleccionado = 33;
+            Identificador = 5;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio6 = findViewById(R.id.btnPrecio6);
         btnPrecio6.setOnClickListener(v -> {
-            precioSeleccionado = 55;
+            Identificador = 6;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio7 = findViewById(R.id.btnPrecio7);
         btnPrecio7.setOnClickListener(v -> {
-            precioSeleccionado = 110;
+            Identificador = 7;
             Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
+            startActivity(intent);
+        });
+        Button btnPrecio8 = findViewById(R.id.btnPrecio8);
+        btnPrecio8.setOnClickListener(v -> {
+            Identificador = 8;
+            Intent intent = new Intent(MenuInternet.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
     }
