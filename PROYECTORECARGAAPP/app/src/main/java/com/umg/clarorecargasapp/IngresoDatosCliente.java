@@ -33,7 +33,7 @@ import java.util.List;
 public class IngresoDatosCliente extends AppCompatActivity {
 
     private String opcion;
-    private int precio;
+    private int Identificador;
     private EditText editTextTelefono;
     private DBHelper dbHelper;
 
@@ -52,7 +52,7 @@ public class IngresoDatosCliente extends AppCompatActivity {
 
         // Obtener datos del Intent
         opcion = getIntent().getStringExtra("opcion");
-        precio = getIntent().getIntExtra("precio", 0);
+        Identificador = getIntent().getIntExtra("id", 0);
 
         // aqui obtenemos los botones que estan en el XML
         editTextTelefono = findViewById(R.id.etPhoneNumber);
@@ -77,7 +77,7 @@ public class IngresoDatosCliente extends AppCompatActivity {
             // Verificar si el texto contiene solo números
             if (phoneNumber.matches("\\d+")) {
                 // Buscar la secuencia correspondiente al tipo y precio seleccionados
-                String secuencia = buscarSecuencia(opcion, precio);
+                String secuencia = buscarSecuencia(opcion, Identificador);
                 if (secuencia != null) {
                     // Mostrar el diálogo para seleccionar la tienda
                     showSelectStoreDialog(secuencia, phoneNumber);
@@ -121,15 +121,15 @@ public class IngresoDatosCliente extends AppCompatActivity {
         });
     }
 
-    private String buscarSecuencia(String tipo, int precio) {
+    private String buscarSecuencia(String tipo, int Identificador) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String secuencia = null;
 
         // Consulta SQL para obtener la secuencia
-        String query = "SELECT Secuencia_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ? AND Precio_codigo = ?";
+        String query = "SELECT Secuencia_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ? AND ID_codigo = ?";
         try {
-            Cursor cursor = db.rawQuery(query, new String[]{tipo, String.valueOf(precio)});
+            Cursor cursor = db.rawQuery(query, new String[]{tipo, String.valueOf(Identificador)});
 
             // Comprobar si se obtuvo alguna fila
             if (cursor != null) {
@@ -141,7 +141,7 @@ public class IngresoDatosCliente extends AppCompatActivity {
                         Log.e("DB Error", "Columna 'Secuencia_codigo' no encontrada.");
                     }
                 } else {
-                    Log.e("DB Error", "No se encontraron resultados para tipo: " + tipo + ", precio: " + precio);
+                    Log.e("DB Error", "No se encontraron resultados para tipo: " + tipo + ", precio: " + Identificador);
                 }
                 cursor.close();
             } else {
@@ -179,7 +179,7 @@ public class IngresoDatosCliente extends AppCompatActivity {
 
             if (pin != -1) {
                 // Verificar estados
-                String estadoSecuencia = buscarEstadoSecuencia(opcion, precio); // Ahora busca por tipo y precio
+                String estadoSecuencia = buscarEstadoSecuencia(opcion, Identificador); // Ahora busca por tipo y precio
                 String estadoPin = buscarEstadoPin(selectedStore);  // Busca por tienda, tipo y precio
 
                 if ("Inactivo".equals(estadoSecuencia) || "Suspendido".equals(estadoSecuencia) ||
@@ -292,13 +292,13 @@ public class IngresoDatosCliente extends AppCompatActivity {
         return pin;
     }
 
-    private String buscarEstadoSecuencia(String tipo, int precio) {
+    private String buscarEstadoSecuencia(String tipo, int Identificador) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String estado = null;
 
-        String query = "SELECT estado_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ? AND Precio_codigo = ?";
-        try (Cursor cursor = db.rawQuery(query, new String[]{tipo, String.valueOf(precio)})) {
+        String query = "SELECT estado_codigo FROM tbl_codigosRecarga WHERE Tipo_codigo = ? AND ID_codigo = ?";
+        try (Cursor cursor = db.rawQuery(query, new String[]{tipo, String.valueOf(Identificador)})) {
             if (cursor != null && cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex("estado_codigo");
                 if (columnIndex != -1) {

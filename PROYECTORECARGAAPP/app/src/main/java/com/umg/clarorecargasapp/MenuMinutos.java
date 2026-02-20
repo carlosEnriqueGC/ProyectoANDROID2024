@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MenuMinutos extends AppCompatActivity {
 
     String tipo = "Minutos";
-    private int precioSeleccionado;
+    private int Identificador;
 
 
     @Override
@@ -40,46 +40,55 @@ public class MenuMinutos extends AppCompatActivity {
 
         Button btnPrecio1M = findViewById(R.id.btnPrecio1M);
         btnPrecio1M.setOnClickListener(v -> {
-            precioSeleccionado = 7;
+            Identificador = 18;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio2M = findViewById(R.id.btnPrecio2M);
         btnPrecio2M.setOnClickListener(v -> {
-            precioSeleccionado = 12;
+            Identificador = 19;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio3M = findViewById(R.id.btnPrecio3M);
         btnPrecio3M.setOnClickListener(v -> {
-            precioSeleccionado = 15;
+            Identificador = 20;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio4M = findViewById(R.id.btnPrecio4M);
         btnPrecio4M.setOnClickListener(v -> {
-            precioSeleccionado = 25;
+            Identificador = 21;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
 
         Button btnPrecio5M = findViewById(R.id.btnPrecio5M);
         btnPrecio5M.setOnClickListener(v -> {
-            precioSeleccionado = 50;
+            Identificador = 22;
             Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
             intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
-            intent.putExtra("precio", precioSeleccionado);
+            intent.putExtra("id", Identificador);
+            startActivity(intent);
+        });
+
+        Button btnPrecio6M = findViewById(R.id.btnPrecio6M);
+        btnPrecio6M.setOnClickListener(v -> {
+            Identificador = 23;
+            Intent intent = new Intent(MenuMinutos.this, IngresoDatosCliente.class);
+            intent.putExtra("opcion", tipo); // Aquí se pasa el tipo
+            intent.putExtra("id", Identificador);
             startActivity(intent);
         });
     }
